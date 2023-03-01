@@ -10,8 +10,11 @@ const client = axios.create({
   },
 });
 
-export const request = (config) => {
-  return client({ ...config })
-    .then((res) => res.data.data)
-    .catch((err) => Promise.reject(err.response));
+export const request = async (config) => {
+  try {
+    const res = await client({ ...config });
+    return res.data.data;
+  } catch (err) {
+    return await Promise.reject(err.response);
+  }
 };
